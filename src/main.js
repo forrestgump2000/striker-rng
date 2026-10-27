@@ -11,6 +11,7 @@ import {
 import { portraitSVG } from './portrait.js';
 import { AvatarPreview } from './avatar3d.js';
 import { sfx, setSound } from './sound.js';
+import { startBackground, enableCardTilt } from './fx.js';
 
 let save = loadSave();
 setSound(save.sound);
@@ -23,8 +24,8 @@ const $ = (sel, root = document) => root.querySelector(sel);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const persist = () => writeSave(save);
 
-const portraitCache = {};
-const portrait = c => (portraitCache[c.id] ||= portraitSVG(c));
+// Rendered fresh each time so SVG gradient/filter ids stay unique in the DOM.
+const portrait = c => portraitSVG(c);
 
 const FIRST = ['Kai', 'Ren', 'Sora', 'Hiro', 'Jun', 'Ryo', 'Aoi', 'Rin', 'Yuki', 'Taro', 'Ken', 'Shou', 'Rei', 'Haru', 'Zen'];
 const LAST = ['Aozora', 'Kurogane', 'Hayabusa', 'Tenma', 'Ikazuchi', 'Shiranui', 'Mikazuki', 'Kagami', 'Hoshino', 'Raiden', 'Fujimori', 'Akatsuki'];
@@ -711,6 +712,8 @@ document.addEventListener('keydown', e => {
 // ---------------- boot ----------------
 ensureBuild();
 shell();
+startBackground();
+enableCardTilt();
 renderAll();
 try {
   avatar = new AvatarPreview($('#avatar'));
