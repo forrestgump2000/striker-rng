@@ -1,0 +1,19 @@
+{
+  "name": "striker-rng",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "sharp": "0.33.5",
+    "vite": "5.4.11"
+  }
+}
